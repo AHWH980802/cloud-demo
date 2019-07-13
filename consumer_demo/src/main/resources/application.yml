@@ -1,0 +1,31 @@
+server:
+  port: 8880
+
+spring:
+  application:
+    name: consumer_server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka
+    registry-fetch-interval-seconds: 5
+
+logging:
+  level:
+    cn.itcast: debug
+
+hystrix:
+  command:
+    default:
+      execution:
+       isolation:
+        thread:
+          timeoutInMilliseconds: 6000 # 设置hystrix的超时时间为6000ms
+
+feign:
+  hystrix:
+    enabled: true
+# 修改指定服务的负载均衡算法
+#user-service:
+    ##  ribbon:
+    ##    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

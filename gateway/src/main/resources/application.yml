@@ -1,0 +1,39 @@
+server:
+  port: 10010 #服务端口
+spring:
+  application:
+    name: api-gateway #指定服务名
+
+zuul:
+  routes:
+    user-service: # 这里是路由id，随意写
+      path: /user/** # 这里是映射路径
+      serviceId: user-service
+      strip-prefix: false #去除前缀
+      # url: http://127.0.0.1:8888 # 映射路径对应的实际url地址
+  ignored-services:
+    - consumer_server
+
+
+#zuul:
+#  routes:
+#    user-service: /user/**
+#  prefix: /api
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000 # 设置hystrix的超时时间为6000ms
+
+ribbon:
+  ConnectionTimeout: 1000
+  ReadTimeout: 4000
