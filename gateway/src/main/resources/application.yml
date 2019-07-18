@@ -11,8 +11,9 @@ zuul:
       serviceId: user-service
       strip-prefix: false #去除前缀
       # url: http://127.0.0.1:8888 # 映射路径对应的实际url地址
-  ignored-services:
-    - consumer_server
+  # 禁用所有的原服务名
+  ignored-services: "*"
+
 
 
 #zuul:
